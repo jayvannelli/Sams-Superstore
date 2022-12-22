@@ -66,11 +66,21 @@ def main():
         state = st.selectbox("Select state:", options=df["State"].unique())
         state_df = df.loc[df["State"] == state]
 
-        st.subheader("Sales by city")
+        st.subheader(f"{state} | Sales by city")
         st.bar_chart(state_df, x="City", y="Sales")
 
-        st.subheader("state sales over time")
+        st.subheader(f"{state} | Sales over time")
         st.bar_chart(state_df, x="Order Date", y="Sales")
+
+        st.write("---")
+
+        left_state_column, right_state_column = st.columns(2)
+        with left_state_column:
+            st.subheader("Preferred shipping mode")
+            st.bar_chart(state_df, x="Ship Mode", y="Sales")
+        with right_state_column:
+            st.subheader("Breakdown by sub-category")
+            st.bar_chart(state_df, x="Sub-Category", y="Sales")
 
 
 if __name__ == "__main__":
