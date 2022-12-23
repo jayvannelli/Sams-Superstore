@@ -4,12 +4,18 @@ from src.data import get_superstore_sales_dataset
 
 def display_kpis(data):
     c1, c2, c3 = st.columns(3)
+    total_sales = round(sum(data['Sales']), 2)
+    items_sold = len(data)
+    unique_orders = len(data['Order ID'].unique())
+
     with c1:
-        st.subheader("Total Sales ($)")
-        st.write(f"${round(sum(data['Sales']), 2):,}")
+        st.subheader("Sales ($)")
+        st.write(f"Total: ${total_sales:,}")
+        st.write(f"Average order size: ${round(total_sales/unique_orders, 2):,}")
     with c2:
-        st.subheader("Quantity of Sales")
-        st.write(f"{len(data):,}")
+        st.subheader("Quantity of sales")
+        st.write(f"Total items: {items_sold:,}")
+        st.write(f"Unique orders: {unique_orders:,}")
     with c3:
         st.subheader("Date Range")
         st.write(
