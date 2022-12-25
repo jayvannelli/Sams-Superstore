@@ -2,6 +2,12 @@ import streamlit as st
 from src.data import get_superstore_sales_dataset
 
 
+def groupby_state(data):
+    cleaned_df = data[["State", "Sales"]]
+    df = cleaned_df.groupby(['State'])
+    return df
+
+
 def main():
     st.title("Demographic Breakdown")
     st.write("---")
@@ -59,6 +65,12 @@ def main():
 
         st.subheader("Sales by State")
         st.bar_chart(df, x="State", y="Sales")
+
+        st.write("---")
+        st.subheader("State stats")
+
+        grouped_state_data = groupby_state(df)
+        st.write(grouped_state_data.describe())
 
     with single_state_tab:
 
