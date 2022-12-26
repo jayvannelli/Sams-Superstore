@@ -30,6 +30,10 @@ def main():
 
     st.write("---")
 
+    shallow_df_copy = df.copy()
+    shallow_df_copy['Order Date Name'] = shallow_df_copy['Order Date'].dt.day_name()
+    st.bar_chart(shallow_df_copy, x="Order Date Name", y="Sales")
+
 
 if __name__ == "__main__":
     main()
