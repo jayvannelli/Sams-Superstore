@@ -47,8 +47,6 @@ def main():
     with col2:
         st.bar_chart(year_df, x="Category", y="Sales")
 
-    st.write(year_df)
-
 
 if __name__ == "__main__":
     main()
