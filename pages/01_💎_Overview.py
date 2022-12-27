@@ -30,9 +30,24 @@ def main():
 
     st.write("---")
 
-    shallow_df_copy = df.copy()
-    shallow_df_copy['Order Date Name'] = shallow_df_copy['Order Date'].dt.day_name()
-    st.bar_chart(shallow_df_copy, x="Order Date Name", y="Sales")
+    year_selection = st.selectbox("Select year:", options=[2015, 2016, 2017, 2018])
+    year_df = df[df["Order Date"].dt.year.eq(year_selection)]
+
+    c1, c2 = st.columns([3, 1])
+    with c1:
+        st.bar_chart(year_df, x="Sub-Category", y="Sales")
+    with c2:
+        st.bar_chart(year_df, x="Segment", y="Sales")
+
+    st.write("---")
+
+    col1, col2 = st.columns([2, 2])
+    with col1:
+        st.bar_chart(year_df, x="Region", y="Sales")
+    with col2:
+        st.bar_chart(year_df, x="Category", y="Sales")
+
+    st.write(year_df)
 
 
 if __name__ == "__main__":

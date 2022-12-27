@@ -66,6 +66,11 @@ def main():
         st.subheader("Sales by State")
         st.bar_chart(df, x="State", y="Sales")
 
+        st.subheader("Sales by day of the week")
+        shallow_df_copy = df.copy()
+        shallow_df_copy['Order Date Name'] = shallow_df_copy['Order Date'].dt.day_name()
+        st.bar_chart(shallow_df_copy, x="Order Date Name", y="Sales")
+
         st.write("---")
         st.subheader("State stats")
 
